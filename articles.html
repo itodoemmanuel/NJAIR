@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Published Articles | NJ-AIR</title>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: #0f172a;
+      color: white;
+    }
+    .search-sort {
+      margin-bottom: 30px;
+    }
+    .card {
+      background-color: #1e293b;
+      border: none;
+    }
+    .card-title {
+      color: #fbbf24;
+    }
+    .btn-light {
+      background: #facc15;
+      border: none;
+      color: #000;
+    }
+
+    .navbar, .footer { background-color: #000; }
+    .section-title { color: #ffc107; margin-bottom: 20px; }
+    .card { border: none; border-radius: 0.75rem; }
+    .card-body { background: #222; border-radius: 0.75rem; }
+    .footer a { color: #ccc; text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+    .social-icons a { color: #ffc107; margin: 0 10px; font-size: 1.2rem; }
+  </style>
+  </style>
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark px-4">
+  <a class="navbar-brand" href="#">NJ-AIR</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+      <li class="nav-item"><a class="nav-link" href="articles.html">Article</a></li>
+      <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+      <li class="nav-item"><a class="nav-link" href="current-issues.html">Current Issue</a></li>
+      <li class="nav-item"><a class="nav-link" href="upload.html">Submit</a></li>
+      <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container py-5">
+  <h2 class="text-center mb-4">Published Articles</h2>
+  <div class="row search-sort">
+    <div class="col-md-8">
+      <input type="text" id="searchInput" class="form-control" placeholder="Search by title or author...">
+    </div>
+    <div class="col-md-4">
+      <select id="sortSelect" class="form-select">
+        <option value="default">Sort by</option>
+        <option value="az">Title A–Z</option>
+        <option value="za">Title Z–A</option>
+      </select>
+    </div>
+  </div>
+  <div id="articlesList" class="row g-4"></div>
+</div>
+
+<!-- Footer -->
+<footer class="footer py-5 mt-5">
+  <div class="container">
+    <div class="row text-center text-md-start">
+      <div class="col-md-4 mb-4">
+        <h5 class="text-white">NJ-AIR Journal</h5>
+        <p>Fostering research and innovation in administration from the heart of Nigeria.</p>
+      </div>
+      <div class="col-md-4 mb-4">
+        <h5 class="text-white">Quick Links</h5>
+        <ul class="list-unstyled">
+          <li><a href="#">About</a></li>
+          <li><a href="#">Submission Guidelines</a></li>
+          <li><a href="#">Submit Article</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4 mb-4">
+        <h5 class="text-white">Contact Us</h5>
+        <p>Email: editor@njairjournal.org</p>
+        <p>Phone: +234 801 234 5678</p>
+        <div class="social-icons mt-2">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-x-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+    </div>
+    <hr class="bg-light" />
+    <p class="text-center mb-0">&copy; 2025 NJ-AIR | Rev. Fr. Moses Orshio Adasu University, Makurdi.</p>
+  </div>
+</footer>
+
+
+
+<script>
+  // Firebase Config
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_AUTH_DOMAIN",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_STORAGE_BUCKET",
+    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+    appId: "YOUR_APP_ID"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  let articlesData = [];
+
+  async function fetchArticles() {
+    const snapshot = await db.collection("articles").orderBy("date", "desc").get();
+    articlesData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    renderArticles(articlesData);
+  }
+
+  function renderArticles(articles) {
+    const container = document.getElementById("articlesList");
+    container.innerHTML = "";
+    articles.forEach(article => {
+      const card = document.createElement("div");
+      card.className = "col-md-6";
+      card.innerHTML = `
+        <div class="card text-white h-100">
+          <div class="card-body">
+            <h5 class="card-title">${article.title}</h5>
+            <p><strong>Author(s):</strong> ${article.author}</p>
+            <p><strong>Abstract:</strong> ${article.abstract}</p>
+            <a href="${article.fileUrl}" target="_blank" class="btn btn-light">Read Full Article</a>
+            <p class="text-end text-muted small mt-2">Uploaded: ${new Date(article.date).toLocaleDateString()}</p>
+          </div>
+        </div>`;
+      container.appendChild(card);
+    });
+  }
+
+  document.getElementById("searchInput").addEventListener("input", e => {
+    const term = e.target.value.toLowerCase();
+    const filtered = articlesData.filter(a =>
+      a.title.toLowerCase().includes(term) || a.author.toLowerCase().includes(term)
+    );
+    renderArticles(filtered);
+  });
+
+  document.getElementById("sortSelect").addEventListener("change", e => {
+    let sorted = [...articlesData];
+    if (e.target.value === "az") {
+      sorted.sort((a, b) => a.title.localeCompare(b.title));
+    } else if (e.target.value === "za") {
+      sorted.sort((a, b) => b.title.localeCompare(a.title));
+    }
+    renderArticles(sorted);
+  });
+
+  fetchArticles();
+</script>
+</body>
+</html>
