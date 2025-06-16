@@ -46,9 +46,16 @@
       color: #facc15;
       font-weight: 600;
     }
+    #loading {
+      display: none;
+      color: #facc15;
+      font-weight: bold;
+      margin-top: 1rem;
+    }
   </style>
 </head>
 <body>
+
   <div class="form-section">
     <h2 class="mb-4 text-center">Submit Your Article</h2>
     <form id="articleForm">
@@ -66,13 +73,14 @@
       </div>
       <div class="mb-3">
         <label for="tags" class="form-label">Tags (comma-separated)</label>
-        <input type="text" id="tags" class="form-control" />
+        <input type="text" id="tags" class="form-control" placeholder="e.g. policy, education, governance" />
       </div>
       <div class="mb-3">
         <label for="pdf" class="form-label">Upload PDF</label>
         <input type="file" id="pdf" accept="application/pdf" class="form-control" required />
       </div>
       <button type="submit" class="btn btn-submit w-100 mt-3">Submit Article</button>
+      <div id="loading" class="text-center">Uploading and submitting article...</div>
     </form>
   </div>
 
@@ -81,6 +89,7 @@
     import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
     import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-storage.js";
 
+    // ✅ Replace these with your Firebase config values
     const firebaseConfig = {
       apiKey: "YOUR_API_KEY",
       authDomain: "YOUR_AUTH_DOMAIN",
@@ -94,37 +103,55 @@
     const db = getFirestore(app);
     const storage = getStorage(app);
 
-    document.getElementById("articleForm").addEventListener("submit", async (e) => {
+    const form = document.getElementById("articleForm");
+    const loading = document.getElementById("loading");
+
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      const title = document.getElementById("title").value;
-      const author = document.getElementById("author").value;
-      const abstract = document.getElementById("abstract").value;
-      const tags = document.getElementById("tags").value.split(',').map(t => t.trim());
+      const title = document.getElementById("title").value.trim();
+      const author = document.getElementById("author").value.trim();
+      const abstract = document.getElementById("abstract").value.trim();
+      const tagsInput = document.getElementById("tags").value.trim();
       const file = document.getElementById("pdf").files[0];
 
-      if (!file) return alert("Please upload a PDF file.");
+      if (!title || !author || !abstract || !file) {
+        alert("Please fill in all required fields.");
+        return;
+      }
+
+      loading.style.display = "block";
 
       try {
-        const storageRef = ref(storage, 'submissions/' + file.name);
+        // Unique filename using timestamp
+        const timestamp = Date.now();
+        const filename = `article_${timestamp}_${file.name}`;
+        const storageRef = ref(storage, 'submissions/' + filename);
+
         await uploadBytes(storageRef, file);
-        const pdfURL = await getDownloadURL(storageRef);
+        const fileURL = await getDownloadURL(storageRef);
+
+        const tags = tagsInput
+          ? tagsInput.split(",").map(tag => tag.trim()).filter(tag => tag.length > 0)
+          : [];
 
         await addDoc(collection(db, "submissions"), {
           title,
           author,
           abstract,
           tags,
-          pdfURL,
+          fileUrl: fileURL,
           submittedAt: serverTimestamp(),
-          status: "pending"
+          approved: false // Flag for moderation
         });
 
-        alert("Your article has been submitted for review.");
-        document.getElementById("articleForm").reset();
+        alert("✅ Article submitted successfully. It will be reviewed before publication.");
+        form.reset();
       } catch (error) {
-        console.error("Upload error:", error);
-        alert("Failed to upload article.");
+        console.error("❌ Submission Error:", error);
+        alert("An error occurred while submitting the article.");
+      } finally {
+        loading.style.display = "none";
       }
     });
   </script>
