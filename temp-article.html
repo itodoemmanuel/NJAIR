@@ -1,0 +1,460 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>NJAIR Articles | Rev. Fr. Moses Orshio Adasu University</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- Bootstrap Icons (make sure this is added in <head> or just before closing </body>) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link rel="icon" type="image/png" href="fav.png">
+
+  <style>
+    :root {
+      --green: #2b9348;
+      --oxblood: #800020;
+      --dark: #0f172a;
+      --light: #f8f9fa;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #ffffff;
+      color: #111;
+    }
+
+    .navbar {
+      background-color: var(--dark);
+      padding: 0.8rem 1.5rem;
+    }
+
+    .navbar-brand span {
+      color: var(--green);
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--oxblood);
+      margin-bottom: 10px;
+    }
+
+    .search-bar {
+      max-width: 600px;
+      margin: 20px auto 40px;
+    }
+
+    .card {
+      border: 1px solid #eee;
+      border-left: 5px solid var(--green);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      background-color: #fff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    }
+
+    .card:hover {
+      border-left-color: var(--oxblood);
+      transform: translateY(-2px);
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--oxblood);
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: #333;
+      line-height: 1.5;
+    }
+
+    .btn-download {
+      background-color: var(--oxblood);
+      color: #fff;
+      font-size: 0.85rem;
+      border-radius: 30px;
+      padding: 6px 16px;
+    }
+
+    .btn-download:hover {
+      background-color: #a52a2a;
+    }
+
+    footer {
+      background-color: var(--dark);
+      color: #ccc;
+      padding: 3rem 0 1rem;
+    }
+
+    footer h5 {
+      color: #fff;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    footer a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    footer a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    footer p {
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 767px) {
+      .card-title {
+        font-size: 1rem;
+      }
+      .card p {
+        font-size: 0.85rem;
+      }
+    }
+
+    .abstract {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark px-4">
+  <a class="navbar-brand d-flex align-items-center" href="index.html">
+    <img src="logo.jpg" alt="NJAIR Logo" width="50" height="50" class="me-2">
+    <span>NJAIR</span>
+  </a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+      <li class="nav-item"><a class="nav-link" href="temp-article.html">Articles</a></li>
+      <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+     
+      <li class="nav-item"><a class="nav-link" href="upload.html">Submit Paper</a></li>
+      <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      <li class="nav-item">
+        <a class="nav-link text-warning" href="#"><i class="fas fa-user-shield"></i> Student Corner</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Modern Header -->
+<header class="bg-dark text-white text-center py-5 position-relative">
+  <div class="container">
+    <h1 class="display-5 fw-bold mb-3">NJAIR 2025 – Published Articles</h1>
+    <p class="lead text-light">Explore peer-reviewed research articles from the maiden edition of the NJAIR journal.</p>
+  </div>
+
+  <!-- Elegant Search Bar -->
+  <div class="container mt-4">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="input-group shadow-sm">
+          <span class="input-group-text bg-white border-end-0">
+            <i class="bi bi-search text-muted"></i>
+            <p id="noResults" style="display:none;" class="text-center mt-3 text-muted">No matching articles found.</p>
+
+          </span>
+          <input 
+            type="text" 
+            id="searchInput" 
+            class="form-control border-start-0" 
+            placeholder="Search articles by title, author or keyword...">
+          <button class="btn btn-warning" type="button" onclick="searchArticles()">Search</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<!-- Article Grid -->
+<div class="container pb-5">
+  <div class="row g-4" id="articleList">
+    <!-- ALL YOUR ARTICLE CARDS HERE -->
+
+<!-- Article 1 -->
+<div class="col-md-6 article-item" data-title="Youth Movements and their Role in Strengthening" data-author="Prof. John Enyi">
+  <div class="card h-100 shadow-sm border-0">
+    <div class="card-body d-flex flex-column">
+      <h5 class="card-title text-oxblood mb-3">Youth Movements and their Role in Strengthening Democracy and Governance in Nigeria</h5>
+      <p><strong>Author(s):</strong> Emmanuel Terwase Yandela, Onamah Godwin Ojodomo, PhD, Alhassan Yakubu Adeku & Fortune Ojochetule Yusufu</p>
+      <p class="text-muted small">
+        Department of Public Administration, Rev. Fr. Moses Orshio Adasu University, Makurdi<br>
+        Department of Public Administration, Kogi State Polytechnic, Lokoja-Nigeria
+      </p>
+      <p class="abstract">
+        <strong>Abstract:</strong> Youth movements are crucial in shaping democratic processes and governance structures in Nigeria. These community-driven initiatives are essential for advocating social justice, influencing policy reforms, and enhancing civic engagement. Despite their significance, there is a need for a deeper understanding of their roles and impacts within Nigeria's democratic framework. This study addresses this problem by examining youth movements' participation in democratic activities, their impact on local governance, and their role in promoting political awareness and civic engagement. The theoretical framework of Participatory Democracy Theory underpins this study, emphasising the importance of active citizen involvement in decision-making processes for strengthening democracy. The research employs a descriptive methodology, drawing on secondary sources such as academic journals, news articles, and policy documents. Findings reveal that youth movements, such as the End SARS Movements, have significantly influenced public discourse and governmental action. These movements have mobilised community support and driven political reform, despite facing challenges like political repression and fragmentation.
+      </p>
+      <button class="btn btn-sm btn-link p-0 text-oxblood read-more">Read More</button>
+      <a href="NIGERIAN JOURNAL, BENUE STATE UNIVERSITY, MAKURDI, 2025.pdf" class="btn btn-download btn-sm mt-auto" download>
+        <i class="fas fa-download me-2"></i>Download Article
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Article 2 -->
+<div class="col-md-6 article-item" data-title="Federal Road Safety Corps and Administration of Road Safety in Benue State" data-author="Dr. Jane Oche">
+  <div class="card h-100 shadow-sm border-0">
+    <div class="card-body d-flex flex-column">
+      <h5 class="card-title text-oxblood mb-3">Federal Road Safety Corps and Administration of Road Safety in Benue State</h5>
+      <p><strong>Author(s):</strong> Timothy I. Utile & Viola Terungwa Atsuwe</p>
+      <p class="text-muted small">Department of Public Administration, Rev. Fr. Moses Orshio Adasu University, Makurdi</p>
+      <p class="abstract">
+        <strong>Abstract:</strong> The purpose of the Federal Road Safety Corps in Nigeria is to make highways safe and ensure safety on our roads is guaranteed. In view of this the trajectory of the paper was to investigate; Federal Road Safety Corps and Administration of Road Safety in Benue State. The paper was guided by three objectives and questions. The theoretical framework used in the paper is Skinner's behavioural theory of 1950. The theory assumes that accidents generally are caused by individuals as a result of recklessness. Methodologically, the study depended on both primary and secondary sources. The primary sources were based on a self-designed questionnaire and Key Informant Interview (KII) while the secondary sources were obtained from text books, journals, internet and other documents relating to the Federal Road Safety in Benue State. Findings show that, the Federal Road Safety Corps was established in Nigeria in 1988, with the core mandate of ensuring that over speeding and bad state of vehicles which result in road accidents are curtailed. It is also evident that the FRSC to a large extent is struggling to tackle the safety of roads in Nigeria and Benue State in particular. Its challenges include poor remuneration, corruption, lack of effective working conditions/tools, poor leadership as well as inadequate publicity. The study amongst other things recommends that the Federal Road Safety Corps adopts a more proactive and community-engaging approach by increasing its visibility and accessibility within the locals. Also, provision of standard working environments/tools and effective leadership be enhanced.
+      </p>
+      <button class="btn btn-sm btn-link p-0 text-oxblood read-more">Read More</button>
+      <a href="NIGERIAN JOURNAL, BENUE STATE UNIVERSITY, MAKURDI, 2025.pdf" class="btn btn-download btn-sm mt-auto" download>
+        <i class="fas fa-download me-2"></i>Download Article
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Article 3 -->
+<div class="col-md-6 article-item" data-title="Industrial Revolution and the Expansion of Europe" data-author="Dr. Paulina Akpa">
+  <div class="card h-100 shadow-sm border-0">
+    <div class="card-body d-flex flex-column">
+      <h5 class="card-title text-oxblood mb-3">Industrial Revolution and the Expansion of Europe</h5>
+      <p><strong>Author(s):</strong> Samson Aondowase Fada, Terver Akpar & Fanen Akuraga</p>
+      <p class="text-muted small">Department of Political Science, Rev. Fr. Moses Orshio Adasu University, Makurdi</p>
+      <p class="abstract">
+        <strong>Abstract:</strong> This paper examines the expansion of Europe in the wake of the Industrial Revolution and the consequences thereof on the economies of developing nations. The paper employed the qualitative research design by relying heavily on existing secondary data. The paper utilized the Capitalist Theory as a framework of analysis. Findings from the research revealed that the industrial revolution and the subsequent expansion in Europe led to the infiltration and disarticulation of the economies and culture of the developing nations. Therefore, the paper concluded that the Industrial Revolution transformed the social-economy of Europe. The creation of an industrial proletariat produced a whole new force for change. The development of a wealthy industrial middle class presented a challenge to the long-term hegemony of landed wealth. Though that wealth had been threatened by the fortunes of commerce, it had never been overturned. Sequel to the above findings and conclusion, the paper recommended that thepolitical elites and leaders in developing nations across the globe need to understand and apply the principles of industrial revolution as state policy in order to improve the lots of their subjects and create enabling environment for a modern state system; developing nations should stimulate primary production to enhance the competitiveness of real sector participation in their economies.
+      </p>
+      <button class="btn btn-sm btn-link p-0 text-oxblood read-more">Read More</button>
+      <a href="NIGERIAN JOURNAL, BENUE STATE UNIVERSITY, MAKURDI, 2025.pdf" class="btn btn-download btn-sm mt-auto" download>
+        <i class="fas fa-download me-2"></i>Download Article
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Article 4 -->
+<div class="col-md-6 article-item" data-title="The Challenges of e-Governance in Nigeria" data-author="Dr. Chika Ogbodo">
+  <div class="card h-100 shadow-sm border-0">
+    <div class="card-body d-flex flex-column">
+      <h5 class="card-title text-oxblood mb-3">The Challenges of e-Governance in Nigeria</h5>
+      <p><strong>Author(s):</strong> Chinedu Josiah Charles, Usman Danladi Umaru & Augustina Iheoma Ihiaso</p>
+      <p class="text-muted small">Department of Public Administration, University of Maiduguri & Federal Polytechnic Nekede</p>
+      <p class="abstract">
+        <strong>Abstract:</strong> Nigeria faces significant governance issues, including inefficiency, poor resource allocation, corruption, and inadequate infrastructure. The adoption of E-governance is seen as a critical solution to streamline administrative processes, enhance transparency, and improve service delivery. However, poor technological infrastructure, limited internet connectivity, resistance to change, and low Information Communication Technology literacy remain key obstacles. The paper therefore traces Nigeria's E-governance journey from the early 2000s, highlighting initiatives such as the establishment of the National Information Technology Development Agency, the Integrated Payroll and Personnel Information System, and the Government Integrated Financial Management Information System. Despite notable progress, Nigeria's E- Governance Development Index ranking has declined, reflecting persistent challenges. Empirical studies reveal infrastructural deficiencies and socio-cultural barriers as major constraints. Additionally, power supply issues and lack of accountability, further complicate implementation. The study emphasizes the importance of leadership commitment, digital literacy, and sufficient investment in Information Communication Technology infrastructure for the success of E-governance.The paper concludes with Nigeria being advanced in E- governance adoption, but issues like poor infrastructure, limited connectivity, power shortages, and resistance hinder progress. Finally, the study recommends the establishment of Ministry of ICT Affairs, training of public staff members on the use E-governance to provide efficient service delivery, and availability of power supply among other things. The paper adopted desk review methodology to consolidate findings from secondary sources, including scholarly articles, government reports, policy documents, organizational publications, and credible online resources.
+      </p>
+      <button class="btn btn-sm btn-link p-0 text-oxblood read-more">Read More</button>
+      <a href="NIGERIAN JOURNAL, BENUE STATE UNIVERSITY, MAKURDI, 2025.pdf" class="btn btn-download btn-sm mt-auto" download>
+        <i class="fas fa-download me-2"></i>Download Article
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Article 5 -->
+<div class="col-md-6 article-item" data-title="Impact of Human Resource Management Practices on Staff Performance" data-author="Timothy I. Utile">
+  <div class="card h-100 shadow-sm border-0">
+    <div class="card-body d-flex flex-column">
+      <h5 class="card-title text-oxblood mb-3">Impact of Human Resource Management Practices on Staff Performance</h5>
+      <p><strong>Author:</strong> Timothy I. Utile</p>
+      <p class="text-muted small">Department of Public Administration, Rev. Fr. Moses Orshio Adasu University, Makurdi</p>
+      <p class="abstract">
+        <strong>Abstract:</strong> Rev. Fr. Moses Orshio Adasu University, Makurdi, was established in 1992 by then Governor of Benue State, Rev. Fr. Moses Orshio Adasu, as the first state-owned university in Northern Nigeria. The University's academic programmes commenced in 1993 with a staff strength of fewer than four hundred (400). The University currently has 1,991 staff members, comprising 677 academic staff and 1,314 non-academic staff, with a total enrolment of 29,459 students. This study was conducted to examine the impact of Human Resource Management Practices on performance at Rev. Fr. Moses Orshio Adasu University, Makurdi A survey design was employed, and the purposive sampling technique was adopted to select two hundred (200) respondents from the University's staff pool. Data were gathered through the administration of questionnaires to the sampled population and analysed descriptively. The Human Capital Theory was adopted. From the responses obtained and analysed, the findings revealed that there is a significant positive relationship between human resource management functions and university effectiveness. Additionally, it was found that management styles have a significant positive influence on employees' productivity and job satisfaction at Rev. Fr. Moses Orshio Adasu University, Makurdi. Furthermore, a significant positive relationship between motivation and staff productivity was identified. The study, therefore, recommends that training and development programmes and policies should be introduced and monitored to ensure the effective implementation of in-service courses for employees, alongside staff seminars such as induction courses, on-the-job training, and off-the-job training. Moreover, human resource management should implement sound policies regarding staff transfers and promotions to ensure justice and fairness in dealings with staff.
+      </p>
+      <button class="btn btn-sm btn-link p-0 text-oxblood read-more">Read More</button>
+      <a href="NIGERIAN JOURNAL, BENUE STATE UNIVERSITY, MAKURDI, 2025.pdf" class="btn btn-download btn-sm mt-auto" download>
+        <i class="fas fa-download me-2"></i>Download Article
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Article 6 -->
+<div class="col-md-6 article-item" data-title="Naira Redesign Policy and Socio-Economic Development in Benue State" data-author="Benjamin Terzungwe">
+  <div class="card h-100 shadow-sm border-0">
+    <div class="card-body d-flex flex-column">
+      <h5 class="card-title text-oxblood mb-3">Naira Redesign Policy and Socio-Economic Development in Benue State</h5>
+      <p><strong>Author(s):</strong> Benjamin Terzungwe Tough, Jerome Nyamve Ulam & Felicia Itodo</p>
+      <p class="text-muted small">Department of Public Administration, Rev. Fr. Moses Orshio Adasu University, Makurdi</p>
+      <p class="abstract">
+        <strong>Abstract:</strong> The study examined the impact of naira redesign policy on the economy Of Benue State. The study adopted a survey design with a sample size of 400 respondents selected for the study. Questionnaire and Key Informant Interview (KII) was used as instruments of data collection. Decision- making theory was adopted as the theoretical framework for the study. The findings of the study showed that the naira redesign policy fell short of its goals due to a lack of public confidence in digital financial products, which is mainly due to perceptions of high levels of fraud associated with them and coupled with poor sensitization particularly of the CBN's directives and deadlines. Additionally, the digital financial infrastructure was insufficient to handle the increased digital transaction volume caused by the cash shortage. The study also found that the policy negatively impacted several livelihoods in Benue State resulting into negative impacts on the financial welfare as Point of Sale (POS) operators charged exorbitant fees for cash withdrawal as they became a vital alternative to banks. There were also cases of cash trading whereby the new naira notes were purchased at high prices, a testament to the desperate situation created by the policy. The study also discovered that small businesses were worse hit by the cash crunch due to the naira redesign policy because they rely heavily on cash to carry out their activities. The study recommends that there is the need to intensify the public enlightenment programme about the cashless system so that everybody will be acquainted with the system, since there is a high rate of illiteracy. The Central Bank of Nigeria should also give a long time for the retrieving of the old currency designed to the new currency redesigned so that small businesses would not astronomically lose their customers base.
+      </p>
+      <button class="btn btn-sm btn-link p-0 text-oxblood read-more">Read More</button>
+      <a href="NIGERIAN JOURNAL, BENUE STATE UNIVERSITY, MAKURDI, 2025.pdf" class="btn btn-download btn-sm mt-auto" download>
+        <i class="fas fa-download me-2"></i>Download Article
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Article 7 -->
+<div class="col-md-6 article-item" data-title="National Policy on Environment and Community Participation" data-author="Timothy I. Utile">
+  <div class="card h-100 shadow-sm border-0">
+    <div class="card-body d-flex flex-column">
+      <h5 class="card-title text-oxblood mb-3">National Policy on Environment and Community Participation</h5>
+      <p><strong>Author(s):</strong> Timothy I. Utile & Susan Tor</p>
+      <p class="text-muted small">Department of Public Administration, Rev. Fr. Moses Orshio Adasu University, Makurdi</p>
+      <p class="abstract">
+        <strong>Abstract:</strong> This study explores the relationship between Nigeria's 2016 Revised National Policy on Environment and community participation in agriculture and food production, focusing on Benue State. Benue state plays a vital role in Nigeria's food security, yet it faces significant environmental challenges, including climate change, deforestation, soil degradation, and water management issues. These environmental threats have adversely affected agricultural productivity and the livelihoods of rural communities. The objectives of the study include, to examine the national policy on the environment in relation to agriculture, to assess the level of community participation in agriculture in Benue State. This study employs a qualitative research design with a case study approach, focusing on Vandeikya and Makurdi Local Government Areas (LGAs). Primary data were collected through semi-structured interviews with stakeholders, focus group discussions (FGDs) with farmers and cooperatives, and field observations. Secondary data sources included policy documents, academic literature, and reports from initiatives like the Agro-Climatic Resilience in Semi-Arid Landscapes (ACReSAL) project. Thematic analysis was applied to categorize findings and identify policy gaps in agricultural sustainability. The research highlights weak institutional coordination, inadequate funding, land tenure insecurity, and limited community engagement as major barriers to policy implementation. Sustainable Development Theory and Participatory Development Theory guide the study, emphasizing the importance of integrating local communities in decision-making processes for effective resource management. The key findings underscore the need for strengthening institutional frameworks, increasing funding for environmental programs, addressing land tenure issues, and developing robust monitoring systems. This study underscores the need for a multi-stakeholder approach to ensure the successful implementation of the national policy on environment, improve agricultural resilience, and secure food production for future generations.
+      </p>
+      <button class="btn btn-sm btn-link p-0 text-oxblood read-more">Read More</button>
+      <a href="NIGERIAN JOURNAL, BENUE STATE UNIVERSITY, MAKURDI, 2025.pdf" class="btn btn-download btn-sm mt-auto" download>
+        <i class="fas fa-download me-2"></i>Download Article
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Article 8 -->
+<div class="col-md-6 article-item" data-title="Foreign Direct Investment and Technology Transfer in Nigeria" data-author="Kizito Kater Mile">
+  <div class="card h-100 shadow-sm border-0">
+    <div class="card-body d-flex flex-column">
+      <h5 class="card-title text-oxblood mb-3">Foreign Direct Investment and Technology Transfer in Nigeria</h5>
+      <p><strong>Author(s):</strong> Kizito Kater Mile & Abel Dooior Apinega</p>
+      <p class="text-muted small">Departments of Political Science & Public Administration, Rev. Fr. Moses Orshio Adasu University</p>
+      <p class="abstract">
+        <strong>Abstract:</strong> The Nigerian state for quite some time has been saddled with the challenges of technology transfer as the country has remained a producer of raw materials for industrial countries. One of various ways Nigeria has sought to overcome her technology advancement challenges is through foreign direct investment. This paper, therefore, assessed the impact of Foreign Direct Investment (FDI) on technological transfers in production/ manufacturing, oil and gas, agriculture and telecommunication sectors in Nigeria. This study utilized ex post factousing secondary sources of dataas the main instrument of data collection. Findings of the study revealed that a sum of 130.1 billion dollars was received from foreign capital importation during 2012-2023, out of whichFDI inflow stood at 11.72 billion dollars. Thus, the Multinational Corporations (MNCs) operating in Nigeria has provided training programs to Nigerians working in the various sectors of the economy. Nigerians were not made to know the intricacies of producing goods and services effectively and efficiently. Consequently, Nigerian working in these companies innovation ability was not enhanced. The activities of MNCs have generated little multiplier effects for local firms in the country. Therefore, the general impact of FDI on technology transfer in Nigeria is low. The study therefore recommends that Nigerian government needs to increase funding for Research and Development (R&D) activities to support technological advancements.
+      </p>
+      <button class="btn btn-sm btn-link p-0 text-oxblood read-more">Read More</button>
+      <a href="NIGERIAN JOURNAL, BENUE STATE UNIVERSITY, MAKURDI, 2025.pdf" class="btn btn-download btn-sm mt-auto" download>
+        <i class="fas fa-download me-2"></i>Download Article
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Article 9 -->
+<div class="col-md-6 article-item" data-title="Measures to Ensure Effective Revenue Collection in Nigeria" data-author="John Enyi">
+  <div class="card h-100 shadow-sm border-0">
+    <div class="card-body d-flex flex-column">
+      <h5 class="card-title text-oxblood mb-3">Measures to Ensure Effective Revenue Collection in Nigeria</h5>
+      <p><strong>Author:</strong> John Enyi</p>
+      <p class="text-muted small">Department of Public Administration, Rev. Fr. Moses Orshio Adasu University, Makurdi</p>
+      <p class="abstract">
+        <strong>Abstract:</strong> The paper examines the profiles and structures of States and Local Governments Revenue as reflected in taxes and levies collected by these two tiers of government in Nigeria. The paper also examines the various challenges facing the states and local governments in the Internally Generated Revenue (IGR) collection efforts. It also enumerated the measures that would ensure effective revenue collection in the states and local governments in Nigeria. The paper adopted the review of extant literature as the main instrument for the collection of relevant information, while participant observation method served as a useful tool for gathering information on the subject matter. The paper finds that the states and local governments depend heavily on revenue from the Federation Account for their survival. The revenue profiles and structures of states and local governments as contained in the 1999 Constitution (as Amended) are not adequate for their constitutional responsibilities. Besides this, there are numerous challenges facing the states and local governments in IGR collection. In spite of these challenges, there are several measures that would ensure effective IGR collection in states and local governments in Nigeria. The paper concludes that the challenges enumerated can be overcome if the right environment, attitude and processes are put in place by the states and local governments. Therefore, for the dream of an effective IGR collection to be realized, the paper further concludes that the states and local governments in Nigeria must put their acts together and develop the political will to overcome all the challenges constraining effective revenue collection in the states and local government in Nigeria.
+      </p>
+      <button class="btn btn-sm btn-link p-0 text-oxblood read-more">Read More</button>
+      <a href="NIGERIAN JOURNAL, BENUE STATE UNIVERSITY, MAKURDI, 2025.pdf" class="btn btn-download btn-sm mt-auto" download>
+        <i class="fas fa-download me-2"></i>Download Article
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Article 10 -->
+<div class="col-md-6 article-item" data-title="Traditional Rulership and Community Development in Guma LGA" data-author="Terkula Gaavson">
+  <div class="card h-100 shadow-sm border-0">
+    <div class="card-body d-flex flex-column">
+      <h5 class="card-title text-oxblood mb-3">Traditional Rulership and Community Development in Guma LGA</h5>
+      <p><strong>Author(s):</strong> Terkula Gaavson & Emmanuel Shaaperah</p>
+      <p class="text-muted small">Departments of Political Science & Public Administration, Rev. Fr. Moses Orshio Adasu University</p>
+      <p class="abstract">
+        <strong>Abstract:</strong> The paper examined traditional rulership and community development in Guma Local Government Area of Benue State. The paper adopted a survey design with questionnaire and Key Informant Interview used as instruments of primary data collection. Structural–Functionalism theory was used as a framework of analysis. showed that traditional rulers remain for a variety of reasons, important to the plan and realization of community development projects within the area of control. Findings also revealed that traditional rulers constitute the pivot of community development even though they are not entitled to budgetary allocations, they induced the system for effective development ranging from provision of infrastructural facilities such as local roads grading and construction, construction of markets and educational development among others. The paper further revealed that community development in Guma LGA is failing due to improper implementation of public policies and lack of funds. The paper in line with these findings recommended that seminar and training programmes like workshop for rulership and development of skills should from time to time be organized to respond to self-help development projects of the communities. Also, wealthy individuals in the communities can support the traditional rulers embark on projects such as construction of basic amenities including good health centers, electricity and good roads.
+      </p>
+      <button class="btn btn-sm btn-link p-0 text-oxblood read-more">Read More</button>
+      <a href="NIGERIAN JOURNAL, BENUE STATE UNIVERSITY, MAKURDI, 2025.pdf" class="btn btn-download btn-sm mt-auto" download>
+        <i class="fas fa-download me-2"></i>Download Article
+      </a>
+    </div>
+  </div>
+</div>
+
+    
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row text-center text-md-start">
+      <div class="col-md-4 mb-4">
+        <h5>NJAIR Journal</h5>
+        <p>Peer-reviewed journal fostering innovation and administrative research in Nigeria and Africa.</p>
+      </div>
+      <div class="col-md-4 mb-4">
+        <h5>Navigation</h5>
+        <ul class="list-unstyled">
+          <li><a href="about.html">About</a></li>
+          <li><a href="guidelines.html">Submission Guidelines</a></li>
+          <li><a href="upload.html">Submit Article</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4 mb-4">
+        <h5>Contact</h5>
+        <p>Email: editor@njairjournal.org</p>
+        <p>Phone: +234 801 234 5678</p>
+      </div>
+    </div>
+    <hr class="bg-light" />
+    <p class="text-center small mb-0">
+      &copy; 2025 NJAIR, Rev. Fr. Moses Orshio Adasu University, Makurdi. <br>
+      Developed by <a href="https://hemitintellicore.com" target="_blank">Hemit Intellicore Ltd.</a>
+    </p>
+  </div>
+</footer>
+
+<!-- Bootstrap Script -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  document.getElementById("searchInput").addEventListener("input", function () {
+    const query = this.value.toLowerCase();
+    const articles = document.querySelectorAll(".article-item");
+    articles.forEach(item => {
+      const title = item.getAttribute("data-title").toLowerCase();
+      const author = item.getAttribute("data-author").toLowerCase();
+      item.style.display = (title.includes(query) || author.includes(query)) ? "block" : "none";
+    });
+  });
+  
+</script>
+
+<script>
+  document.getElementById("searchInput").addEventListener("input", function () {
+    const query = this.value.trim().toLowerCase();
+    const queryWords = query.split(" ");
+    const articles = document.querySelectorAll(".article-item");
+
+    articles.forEach(item => {
+      const title = item.getAttribute("data-title").toLowerCase();
+      const author = item.getAttribute("data-author").toLowerCase();
+      const combined = title + " " + author;
+
+      const match = queryWords.every(word => combined.includes(word));
+      item.style.display = match ? "block" : "none";
+    });
+  });
+</script>
+
+
+<script>
+  document.querySelectorAll('.read-more').forEach(button => {
+    button.addEventListener('click', function () {
+      const abstract = this.previousElementSibling;
+      abstract.style.webkitLineClamp = 'unset';
+      abstract.style.overflow = 'visible';
+      this.style.display = 'none';
+    });
+  });
+</script>
+
+</body>
+</html>

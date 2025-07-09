@@ -1,90 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Contact | NJ-AIR</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <meta charset="UTF-8" />
+  <title>Contact Us | NJAIR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap & FontAwesome -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<!-- Favicon -->
+  <link rel="icon" type="image/png" href="fav.png">
+  <style>
+    :root {
+      --oxblood: #800020;
+      --green: #2b9348;
+      --white: #f8f9fa;
+      --dark-bg: #0f172a;
+    }
+
+    body {
+      background-color: var(--dark-bg);
+      color: var(--white);
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .navbar, .footer {
+      background-color: #000;
+    }
+
+    .navbar-brand {
+      color: var(--green) !important;
+      font-weight: bold;
+    }
+
+    .nav-link.active, .nav-link:hover {
+      color: var(--oxblood) !important;
+    }
+
+    .section-title {
+      color: var(--green);
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-box {
+      background-color: #1e293b;
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    .form-control, .form-control:focus {
+      background-color: #fff;
+      color: #000;
+    }
+
+    .btn-submit {
+      background-color: var(--oxblood);
+      color: white;
+      border: none;
+    }
+
+    .btn-submit:hover {
+      background-color: #a52a2a;
+    }
+
+    .info-box {
+      background-color: #0d253a;
+      border-left: 4px solid var(--green);
+      padding: 1.2rem;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .info-box i {
+      color: var(--green);
+      margin-right: 10px;
+    }
+
+    .footer a {
+      color: #ccc;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    .social-icons a {
+      color: var(--green);
+      margin: 0 10px;
+      font-size: 1.2rem;
+    }
+
+    hr.custom-line {
+      border-top: 1px solid #444;
+    }
+  </style>
 </head>
-<body class="bg-dark text-white">
-<style>.navbar, .footer { background-color: #000; }
-  .section-title { color: #ffc107; margin-bottom: 20px; }
-  .card { border: none; border-radius: 0.75rem; }
-  .card-body { background: #222; border-radius: 0.75rem; }
-  .footer a { color: #ccc; text-decoration: none; }
-  .footer a:hover { text-decoration: underline; }
-  .social-icons a { color: #ffc107; margin: 0 10px; font-size: 1.2rem; }
-</style>
+<body>
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark px-4">
-    <a class="navbar-brand" href="#">NJ-AIR</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="articles.html">Articles</a></li>
-        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="current-issues.html">Current Issue</a></li>
-        <li class="nav-item"><a class="nav-link" href="upload.html">Submit</a></li>
-        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark px-4">
+  <a class="navbar-brand d-flex align-items-center" href="index.html">
+    <img src="logo.jpg" alt="NJAIR Logo" width="50" height="50" class="me-2">
+    <span>NJAIR</span>
+  </a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+      <li class="nav-item"><a class="nav-link" href="temp-article.html">Articles</a></li>
+      <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+     
+      <li class="nav-item"><a class="nav-link" href="upload.html">Submit Paper</a></li>
+      <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      <li class="nav-item">
+        <a class="nav-link text-warning" href="#"><i class="fas fa-user-shield"></i> Student Corner</a>
+      </li>
+    </ul>
+  </div>
+</nav>
 
-  <section class="container py-5">
-    <h1 class="mb-4 text-center">Contact Us</h1>
-    <div class="row">
-      <div class="col-md-6 mb-4">
-        <h4>Editorial Office</h4>
-        <p>Department of Public Administration</p>
-        <p>Rev. Father Moses Orshio Adasu University, Makurdi</p>
-        <p>Email: <a href="mailto:journal@njair.edu.ng" class="text-info">journal@njair.edu.ng</a></p>
-        <p>Phone: +234 803 123 4567</p>
-      </div>
-      <div class="col-md-6">
-        <h4>Send a Message</h4>
+<!-- Contact Section -->
+<section class="container py-5">
+  <h2 class="text-center section-title">Contact NJAIR</h2>
+  <p class="text-center mb-4">We’d love to hear from you. Reach out to us for submissions, inquiries, or partnerships.</p>
+
+  <div class="row g-5">
+    <!-- Contact Form -->
+    <div class="col-md-6">
+      <div class="contact-box">
         <form>
           <div class="mb-3">
-            <label for="name" class="form-label">Full Name</label>
-            <input type="text" class="form-control" id="name" required>
+            <label class="form-label">Your Name</label>
+            <input type="text" class="form-control" placeholder="Enter your name" required>
           </div>
           <div class="mb-3">
-            <label for="email" class="form-label">Email Address</label>
-            <input type="email" class="form-control" id="email" required>
+            <label class="form-label">Your Email</label>
+            <input type="email" class="form-control" placeholder="Enter your email" required>
           </div>
           <div class="mb-3">
-            <label for="message" class="form-label">Message</label>
-            <textarea class="form-control" id="message" rows="4" required></textarea>
+            <label class="form-label">Message</label>
+            <textarea class="form-control" rows="5" placeholder="Type your message here..." required></textarea>
           </div>
-          <button type="submit" class="btn btn-outline-light">Send</button>
+          <button type="submit" class="btn btn-submit">Send Message</button>
         </form>
       </div>
     </div>
-  </section>
 
- <!-- Footer -->
- <footer class="footer py-5 mt-5">
+    <!-- Contact Info -->
+    <div class="col-md-6">
+      <div class="info-box">
+        <i class="fas fa-map-marker-alt"></i> Department of Public Administration,<br>
+        Rev. Fr. Moses Orshio Adasu University, Makurdi, Nigeria.
+      </div>
+      <div class="info-box">
+        <i class="fas fa-envelope"></i> editor@njairjournal.org
+      </div>
+      <div class="info-box">
+        <i class="fas fa-phone-alt"></i> +234 801 234 5678
+      </div>
+      <div class="info-box">
+        <i class="fas fa-globe"></i> www.njaires.net
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer py-5 mt-5 text-white">
   <div class="container">
     <div class="row text-center text-md-start">
       <div class="col-md-4 mb-4">
-        <h5 class="text-white">NJ-AIR Journal</h5>
+        <h5>NJ-AIR Journal</h5>
         <p>Fostering research and innovation in administration from the heart of Nigeria.</p>
       </div>
       <div class="col-md-4 mb-4">
-        <h5 class="text-white">Quick Links</h5>
+        <h5>Quick Links</h5>
         <ul class="list-unstyled">
-          <li><a href="#">About</a></li>
-          <li><a href="#">Submission Guidelines</a></li>
-          <li><a href="#">Submit Article</a></li>
-          <li><a href="#">Contact Us</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="submission-guidelines.html">Submission Guidelines</a></li>
+          <li><a href="upload.html">Submit Article</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
         </ul>
       </div>
       <div class="col-md-4 mb-4">
-        <h5 class="text-white">Contact Us</h5>
-        <p>Email: editor@njairjournal.org</p>
-        <p>Phone: +234 801 234 5678</p>
+        <h5>Connect with Us</h5>
         <div class="social-icons mt-2">
           <a href="#"><i class="fab fa-facebook-f"></i></a>
           <a href="#"><i class="fab fa-x-twitter"></i></a>
@@ -93,8 +197,15 @@
       </div>
     </div>
     <hr class="bg-light" />
-    <p class="text-center mb-0">&copy; 2025 NJ-AIR | Rev. Fr. Moses Orshio Adasu University, Makurdi.</p>
+    <p class="text-center small mb-0">
+      &copy; 2025 NJAIR, Rev. Fr. Moses Orshio Adasu University, Makurdi. <br>
+      Developed by <a href="https://hemitintellicore.com" target="_blank">Hemit Intellicore Ltd.</a>
+    </p>
   </div>
 </footer>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
